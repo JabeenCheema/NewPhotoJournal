@@ -1,5 +1,5 @@
 //
-//  NewImageViewController.swift
+//  ViewController.swift
 //  NewPhotoJournal
 //
 //  Created by Jabeen's MacBook on 1/14/19.
@@ -8,14 +8,21 @@
 
 import UIKit
 
-class NewImageViewController: UIViewController {
 
+class PhotoJournalViewController: UIViewController {
+   
+    @IBOutlet weak var imageView: UICollectionView!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
     }
     
-
+    
+    
+    
 
 }
+
