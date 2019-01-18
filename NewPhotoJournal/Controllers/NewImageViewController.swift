@@ -18,11 +18,28 @@ class NewImageViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     
+    
+    var photojournal: PhotoJournal?
+    var indexNumber = 0 // in our edit func it needs an index
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupImagePickerViewController()
+        setUpNewImageViewController()
 
         
+    }
+    
+    private func setUpNewImageViewController() { // depending on edit or add
+        if let photojournal = photojournal {
+            textField.text = photojournal.description
+            if let image = UIImage.init(data: photojournal.imageData) {
+                imageView.image = image
+            }
+        } else {
+            textField.text = ""
+            imageView.image = nil
+        }
     }
     
     private func setupImagePickerViewController() {
@@ -57,15 +74,26 @@ class NewImageViewController: UIViewController {
                                           .withTimeZone,
                                           .withDashSeparatorInDate]
         let timeStamp = isoDateFormatter.string(from: date)
+        if let _ = photojournal {
         if let image = imageView.image,
         let description = textField.text {
             if let imageData = image.jpegData(compressionQuality: 0.5) {
                 let photojournal = PhotoJournal.init(date: timeStamp, imageData: imageData, description: description)
-            PhotoJournalModel.addPhoto(photo: photojournal)
-                dismiss(animated: true, completion: nil)
+            PhotoJournalModel.editPhoto(photo: photojournal, atIndex: indexNumber)
+                
+            }
+            }
+        } else { // if its nil then it comes here....meaning we are adding a journal
+            if let image = imageView.image,
+                let description = textField.text {
+                if let imageData = image.jpegData(compressionQuality: 0.5) {
+                    let photojournal = PhotoJournal.init(date: timeStamp, imageData: imageData, description: description)
+                    PhotoJournalModel.addPhoto(photo: photojournal)
+                }
             }
         }
-        }
+        dismiss(animated: true, completion: nil)
+    }
     
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)

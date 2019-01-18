@@ -50,12 +50,21 @@ class PhotoJournalViewController: UIViewController {
         present(destination, animated: true, completion: nil)
     }
     
+    func editPhoto(index: Int) {
+        let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
+        guard let destination = storyBoard.instantiateViewController(withIdentifier: "NewImageViewController") as? NewImageViewController else {return}
+        destination.photojournal = photos[index]
+        destination.indexNumber = index
+        present(destination, animated: true, completion: nil)
+        
+    }
     
     
     @IBAction func activityButton(_ sender: UIButton) {
         let alert = UIAlertController(title: "Actions", message: "pick one", preferredStyle: .actionSheet)
         
         let edit = UIAlertAction.init(title: "Edit", style: .default) { (alert: UIAlertAction) in
+            self.editPhoto(index: sender.tag)
             print("Edit button was clicked")
         }
         
