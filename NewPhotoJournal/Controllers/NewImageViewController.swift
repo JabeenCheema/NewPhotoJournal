@@ -11,7 +11,6 @@ import AVFoundation
 
 class NewImageViewController: UIViewController {
 
-    
     private var imagePhotoJournalViewController: UIImagePickerController!
     
     
@@ -50,6 +49,22 @@ class NewImageViewController: UIViewController {
     }
     
     @IBAction func savePhotoJournal(_ sender: UIBarButtonItem) {
+        let date = Date()
+        let isoDateFormatter = ISO8601DateFormatter()
+        isoDateFormatter.formatOptions = [.withFullDate,
+                                          .withFullTime,
+                                          .withInternetDateTime,
+                                          .withTimeZone,
+                                          .withDashSeparatorInDate]
+        let timeStamp = isoDateFormatter.string(from: date)
+        if let image = imageView.image,
+        let description = textField.text {
+            if let imageData = image.jpegData(compressionQuality: 0.5) {
+                let photojournal = PhotoJournal.init(date: timeStamp, imageData: imageData, description: description)
+            PhotoJournalModel.addPhoto(photo: photojournal)
+                dismiss(animated: true, completion: nil)
+            }
+        }
         }
     
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
@@ -67,7 +82,6 @@ extension NewImageViewController: UIImagePickerControllerDelegate, UINavigationC
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             imageView.image = image
-     //       savePhotoJournal(image: image)
         } else {
             print("original image is nil")
         }

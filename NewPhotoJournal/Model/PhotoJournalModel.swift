@@ -35,7 +35,7 @@ final class PhotoJournalModel {
         photos.append(photo)
         save()
     }
-    static func delete(photo: PhotoJournal, atIndex index: Int) {
+    static func delete(atIndex index: Int) {
         photos.remove(at: index )
         save()
     }

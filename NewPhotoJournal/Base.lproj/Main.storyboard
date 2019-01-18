@@ -24,13 +24,13 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="KZR-1x-oxK"/>
                                     <barButtonItem systemItem="add" id="gKx-3l-eLY">
                                         <connections>
-                                            <segue destination="Bxq-m9-TPX" kind="show" id="ayW-CA-Thf"/>
+                                            <action selector="addButtonpressed:" destination="BYZ-38-t0r" id="vSz-VV-aHc"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="hMU-Lb-deK"/>
                                 </items>
                             </toolbar>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="3Yb-h6-gPA">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="3Yb-h6-gPA" userLabel="CollectionView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="0.47487692636986301" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="PBC-5e-40I">
@@ -93,10 +93,10 @@
                                             <constraint firstItem="3M6-gW-Irz" firstAttribute="leading" secondItem="SQf-m6-W5M" secondAttribute="leadingMargin" id="waL-lo-pYG"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="activityButton" destination="Vwr-uT-GEH" id="Xei-vR-8SC"/>
-                                            <outlet property="imageView" destination="B1j-Se-qMt" id="sFe-pl-i76"/>
-                                            <outlet property="photoDate" destination="3M6-gW-Irz" id="yZx-7M-Kd8"/>
-                                            <outlet property="photoDescription" destination="ZwQ-Uv-8Gc" id="TUU-RZ-T1c"/>
+                                            <outlet property="activityButton" destination="Vwr-uT-GEH" id="sLd-5n-N9t"/>
+                                            <outlet property="imageView" destination="B1j-Se-qMt" id="FnR-vd-lIJ"/>
+                                            <outlet property="photoDate" destination="3M6-gW-Irz" id="iMq-sC-kN1"/>
+                                            <outlet property="photoDescription" destination="ZwQ-Uv-8Gc" id="UnZ-DY-bbp"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -115,8 +115,8 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="cell" destination="SQf-m6-W5M" id="hV1-yi-PAV"/>
-                        <outlet property="imageView" destination="3Yb-h6-gPA" id="WU8-eo-Idw"/>
+                        <outlet property="addButton" destination="gKx-3l-eLY" id="o7B-2c-Sdq"/>
+                        <outlet property="collectionView" destination="3Yb-h6-gPA" id="WdH-QE-Ubq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -126,7 +126,7 @@
         <!--New Image View Controller-->
         <scene sceneID="lns-qz-VMo">
             <objects>
-                <viewController id="Bxq-m9-TPX" customClass="NewImageViewController" customModule="NewPhotoJournal" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewImageViewController" id="Bxq-m9-TPX" customClass="NewImageViewController" customModule="NewPhotoJournal" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yq4-vQ-g19">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
