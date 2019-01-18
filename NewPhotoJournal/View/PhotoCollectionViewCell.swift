@@ -11,12 +11,11 @@ import UIKit
 class PhotoCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
-   
-    @IBAction func activityView(_ sender: UIButton) {
-    }
     @IBOutlet weak var photoDescription: UILabel!
     @IBOutlet weak var photoDate: UILabel!
+    @IBOutlet weak var activityButton: UIButton!
     
 
 
 }
+

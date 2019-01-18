@@ -40,7 +40,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCollectionViewCell" id="SQf-m6-W5M" customClass="PhotoCollectionViewCell" customModule="NewPhotoJournal" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCell" id="SQf-m6-W5M" customClass="PhotoCollectionViewCell" customModule="NewPhotoJournal" customModuleProvider="target">
                                         <rect key="frame" x="10.5" y="0.0" width="354" height="481"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -66,7 +66,7 @@
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="activityView:" destination="SQf-m6-W5M" eventType="touchUpInside" id="eKK-V6-xIA"/>
+                                                        <action selector="activityButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cTe-qp-4Of"/>
                                                     </connections>
                                                 </button>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="B1j-Se-qMt">
@@ -93,6 +93,7 @@
                                             <constraint firstItem="3M6-gW-Irz" firstAttribute="leading" secondItem="SQf-m6-W5M" secondAttribute="leadingMargin" id="waL-lo-pYG"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="activityButton" destination="Vwr-uT-GEH" id="Xei-vR-8SC"/>
                                             <outlet property="imageView" destination="B1j-Se-qMt" id="sFe-pl-i76"/>
                                             <outlet property="photoDate" destination="3M6-gW-Irz" id="yZx-7M-Kd8"/>
                                             <outlet property="photoDescription" destination="ZwQ-Uv-8Gc" id="TUU-RZ-T1c"/>
@@ -114,6 +115,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="cell" destination="SQf-m6-W5M" id="hV1-yi-PAV"/>
                         <outlet property="imageView" destination="3Yb-h6-gPA" id="WU8-eo-Idw"/>
                     </connections>
                 </viewController>
@@ -195,6 +197,7 @@
                         <viewLayoutGuide key="safeArea" id="SZ6-3u-gyc"/>
                     </view>
                     <connections>
+                        <outlet property="cameraButton" destination="UmU-Hz-kNf" id="KZX-q3-OPm"/>
                         <outlet property="imageView" destination="A8q-kN-uqk" id="2W8-9N-Gdx"/>
                         <outlet property="textField" destination="J2D-zd-ppp" id="hKk-ia-aFQ"/>
                     </connections>

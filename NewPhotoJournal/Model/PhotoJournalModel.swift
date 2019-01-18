@@ -9,38 +9,53 @@
 import Foundation
 
 final class PhotoJournalModel {
-    private static let filename = "PhotoJournalList.plist"
+    private static let filename = "NewPhotoJournal.plist"
+    private static var photos = [PhotoJournal]()
     
-    // making the initializer private so nobody can create an instance of it what we can do is PhotoJournalModel.savePhotoJournal()
-    private init() {}
+    static func getPhotos() -> [PhotoJournal]{
+        // FileManager
+        let path = DataPersistenceManager.filepathToDocumentsDirectory(filename: filename).path
+        if FileManager.default.fileExists(atPath: path){
+            if let data = FileManager.default.contents(atPath: path) {
+                do {
+                    photos = try PropertyListDecoder().decode([PhotoJournal].self, from: data)
+                } catch {
+                    print("property list decoding error: \(error)")
+                }
+            }
+        } else {
+            print("\(filename) does not exist")
+        }
+        photos = photos.sorted(by: {$0.date > $1.date})
+        return photos
+    }
     
-    static func savePhotoJournal(photoJournal: PhotoJournal){
+    static func addPhoto(photo: PhotoJournal){
+        // append to the array of photos
+        photos.append(photo)
+        save()
+    }
+    static func delete(photo: PhotoJournal, atIndex index: Int) {
+        photos.remove(at: index )
+        save()
+    }
+    
+    static func save() {
+        // path
         let path = DataPersistenceManager.filepathToDocumentsDirectory(filename: filename)
         do {
-            let data = try PropertyListEncoder().encode(photoJournal)
-            // atomic: write all at once
+            let data = try PropertyListEncoder().encode(photos)
             try data.write(to: path, options: Data.WritingOptions.atomic)
         } catch {
             print("property list encoding error: \(error)")
         }
     }
-    
-    static func getPhotoJournal()-> PhotoJournal? {
-        let path = DataPersistenceManager.filepathToDocumentsDirectory(filename: filename).path
-        var photoJournal: PhotoJournal?
-        if FileManager.default.fileExists(atPath: path) {
-            if let data = FileManager.default.contents(atPath: path) {
-                do {
-                    photoJournal = try PropertyListDecoder().decode(PhotoJournal.self, from: data)
-                } catch {
-                    print("property list decoding error: \(error)")
-                }
-            } else {
-                print("getPhotoJournal - data is nil")
-            }
-        } else {
-            print("\(filename) does not exist" )
-        }
-        return photoJournal
+    static func editPhoto(photo: PhotoJournal, atIndex index:Int) { // this function allows us to save our changes
+        photos.remove(at: index)
+        photos.insert(photo, at: index)
+        save()
     }
+    
 }
+
+
